@@ -25,8 +25,8 @@ package
 		private static var _consoleSprite 	: Sprite;
 		private static var _instance		: Log;
 		
-		private static const _h				: Number = 200;
-		private static const _w				: Number = 400;
+		private static const _h				: Number = Main.mainStage.stageHeight;
+		private static const _w				: Number = Main.mainStage.stageWidth;
 		
 		public function Log() 
 		{	
@@ -65,7 +65,7 @@ package
 			_consoleSprite.graphics.drawRect(0, 0, _w, _h);
 			_consoleSprite.graphics.endFill();
 			_instance.addChild(_consoleSprite);
-			_instance.y = -200;
+			_instance.y = -_h;
 		}
 		
 		public static function e( message : * ) : void
@@ -137,7 +137,7 @@ package
 			var tweenToDefaultPlace : Tween = new Tween(_instance, 1, Transitions.EASE_OUT);
 			tweenToDefaultPlace.onComplete = onCompleteMoveToDefaultPlace;
 			tweenToDefaultPlace.onCompleteArgs = [tweenToDefaultPlace];
-			tweenToDefaultPlace.animate("y", -200);
+			tweenToDefaultPlace.animate("y", -_h);
 			
 			Starling.juggler.add(tweenToDefaultPlace);
 		}

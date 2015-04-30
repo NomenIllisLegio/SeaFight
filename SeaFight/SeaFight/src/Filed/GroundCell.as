@@ -1,5 +1,6 @@
 package Filed 
 {
+	import Filed.interfaces.ICell;
 	import starling.display.Sprite;
 	
 	/**
@@ -8,7 +9,8 @@ package Filed
 	 */
 	public class GroundCell extends Sprite implements ICell 
 	{
-		private function _type : int;
+		private var _type : int = 1;
+		private var _view : GroundCellView;
 		
 		public function GroundCell() 
 		{
@@ -16,12 +18,14 @@ package Filed
 			initCellView();
 		}
 		
-		private function initCellView() : void
-		{
-			
-		}
+		/* INTERFACE Filed.interfaces.ICell */
 		
-		/* INTERFACE Filed.ICell */
+		public function initCellView():void 
+		{	
+			_view = new GroundCellView();
+			_view.width = _view.height = 50;
+			this.addChild(_view);
+		}
 		
 		public function get type():int 
 		{
@@ -31,11 +35,10 @@ package Filed
 		public function set type(value:int):void 
 		{
 			_type = value;
-		}
-		
-		public function set type(value:int):void 
-		{
-			_type = value;
+			if (_view != null)
+			{
+				_view.switcher(_type)
+			}
 		}
 		
 	}
